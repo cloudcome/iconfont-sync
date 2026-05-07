@@ -12,6 +12,9 @@
       "{src,test,scripts}/**/*"
     ],
   },
+  "assist": {
+    "enabled": true,
+  },
   // 继承 .editorconfig
   "formatter": {
     "enabled": true,

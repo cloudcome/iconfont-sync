@@ -4,7 +4,6 @@
  */
 import dts from "vite-plugin-dts";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
-import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig } from "vitest/config";
 
 import pkg from "./package.json";
@@ -13,12 +12,8 @@ export default defineConfig((env) => {
   const isTest = env.mode === "test";
 
   return {
-    base: "/",
-    server: {
-      port: 15170,
-    },
-    preview: {
-      port: 15171,
+    resolve: {
+      tsconfigPaths: true,
     },
     define: {
       PKG_VERSION: JSON.stringify(isTest ? "pkg-version-for-test" : pkg.version),
@@ -60,7 +55,6 @@ export default defineConfig((env) => {
       },
     },
     plugins: [
-      tsconfigPaths(),
       externalizeDeps({
         deps: true,
         devDeps: true,
