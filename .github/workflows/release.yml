@@ -2,18 +2,6 @@ name: release
 
 on:
   workflow_dispatch:
-    inputs:
-      version-type:
-        description: 请选择版本号更新类型。
-         自动版本：根据提交信息自动递增版本号；
-         固定版本：版本号固定为 package.json 中的 version 字段；
-         跳过版本：跳过版本号更新。
-        required: true
-        type: choice
-        options:
-          - 自动版本
-          - 固定版本
-          - 跳过版本
 
 jobs:
   release:
@@ -45,7 +33,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Version bump
-        run: node scripts/ci-version-bump.cjs ${{github.event.inputs.version-type}}
+        run: npx lerna version --yes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
