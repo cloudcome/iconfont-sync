@@ -32,9 +32,9 @@ runs:
 
     - name: Setup pnpm
       if: steps.check.outputs.pm == 'pnpm'
-      uses: pnpm/action-setup@v4 # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
+      uses: pnpm/action-setup@v6 # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
 
-    - uses: actions/setup-node@v4
+    - uses: actions/setup-node@v6
       with:
         node-version-file: .nvmrc
         cache: ${{ steps.check.outputs.pm }}
