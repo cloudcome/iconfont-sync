@@ -44,7 +44,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Version bump
-        run: node scripts/ci-version-bump.cjs --version-type=${{github.event.inputs.version-type}}
+        run: node scripts/ci-version-bump.cjs ${{github.event.inputs.version-type}}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
