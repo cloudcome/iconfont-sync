@@ -2,6 +2,7 @@ import { existsSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { OptionsStrict } from './config';
+import { VERSION } from './const';
 
 /**
  * iconfont 项目 JSON 的数据结构
@@ -51,7 +52,13 @@ export async function buildTypes(options: OptionsStrict) {
   const iconNames = iconfontData.glyphs.map((g) => g.font_class);
   const unionType =
     iconNames.length > 0 ? iconNames.map((n) => `"${n}"`).join(' | ') : 'never';
-  const typeContent = `export type ${typesExportName} = ${unionType};\n`;
+  const typeContent = [
+    '/**',
+    ` * 此文件由 iconfont-sync@${VERSION} 自动生成，请勿手动修改`,
+    ' */',
+    `export type ${typesExportName} = ${unionType};`,
+    '',
+  ].join('\n');
 
   const typesPath = resolve(dest, typesFileName);
   await writeFile(typesPath, typeContent, 'utf-8');

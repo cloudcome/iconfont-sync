@@ -76,7 +76,7 @@ describe('类型生成', () => {
 
     const content = readFileSync(typesPath, 'utf-8');
     expect(content).toBe(
-      'export type IconName = "home" | "user" | "settings";\n',
+      '/**\n * 此文件由 iconfont-sync@pkg-version-for-test 自动生成，请勿手动修改\n */\nexport type IconName = "home" | "user" | "settings";\n',
     );
   });
 
@@ -114,7 +114,9 @@ describe('类型生成', () => {
     });
 
     const content = readFileSync(resolve(TEST_DIR, 'icons.ts'), 'utf-8');
-    expect(content).toBe('export type MyIcons = "only";\n');
+    expect(content).toBe(
+      '/**\n * 此文件由 iconfont-sync@pkg-version-for-test 自动生成，请勿手动修改\n */\nexport type MyIcons = "only";\n',
+    );
   });
 
   it('应正确处理空图标列表', async () => {
@@ -143,7 +145,9 @@ describe('类型生成', () => {
     });
 
     const content = readFileSync(resolve(TEST_DIR, 'iconfont.ts'), 'utf-8');
-    expect(content).toBe('export type IconName = never;\n');
+    expect(content).toBe(
+      '/**\n * 此文件由 iconfont-sync@pkg-version-for-test 自动生成，请勿手动修改\n */\nexport type IconName = never;\n',
+    );
   });
 
   it('iconfont.json 缺失时应抛出错误', async () => {

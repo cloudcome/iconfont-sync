@@ -1,5 +1,6 @@
 import { existsSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { tmpdir } from 'node:os';
+import { join, resolve } from 'node:path';
 import {
   cancel,
   confirm,
@@ -10,6 +11,7 @@ import {
   spinner,
   text,
 } from '@clack/prompts';
+import { uniqueString } from '@cloudcome/utils-core/unique';
 import { buildTypes } from './build';
 import { generateConfig, loadConfig } from './config';
 import { VERSION } from './const';
@@ -87,9 +89,10 @@ async function handleFullSync(): Promise<void> {
   const s = spinner();
 
   s.start('正在下载图标资源');
+  const tempDir = join(tmpdir(), `iconfont-sync-${uniqueString()}`);
   const zipPath = await downloadResource({
     url: downloadUrl,
-    outputDir: dest,
+    outputDir: tempDir,
     filename: zipFilename,
     headers: { Cookie: cookie },
   });
