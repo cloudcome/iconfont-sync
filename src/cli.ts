@@ -19,6 +19,9 @@ import { unzip } from './unzip';
 const ICONFONT_DOWNLOAD_URL =
   'https://www.iconfont.cn/api/project/download.zip';
 
+/**
+ * 生成默认配置文件
+ */
 async function handleGenerateConfig(): Promise<void> {
   const cwd = process.cwd();
 
@@ -31,6 +34,9 @@ async function handleGenerateConfig(): Promise<void> {
   log.success(`已生成配置文件: ${resolve(cwd, '.iconfont-sync.json')}`);
 }
 
+/**
+ * 完整同步操作
+ */
 async function handleFullSync(): Promise<void> {
   const cwd = process.cwd();
   const configPath = resolve(cwd, '.iconfont-sync.json');
@@ -107,7 +113,10 @@ async function handleFullSync(): Promise<void> {
   log.success(`全部完成！图标已同步至: ${resolve(dest)}`);
 }
 
-export async function main(): Promise<void> {
+/**
+ * 运行命令行工具
+ */
+export async function runCommand(): Promise<void> {
   intro(`iconfont-sync@${VERSION}`);
 
   const cwd = process.cwd();
