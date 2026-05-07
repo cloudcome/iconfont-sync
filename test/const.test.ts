@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { VERSION } from '../src/index';
+import { VERSION } from '../src/const';
 
 describe('iconfont-sync', () => {
   it('should export VERSION', () => {
