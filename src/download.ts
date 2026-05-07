@@ -1,7 +1,7 @@
-import fs from 'fs';
-import http from 'http';
-import https from 'https';
-import path from 'path';
+import fs from 'node:fs';
+import http from 'node:http';
+import https from 'node:https';
+import path from 'node:path';
 
 /**
  * 下载选项配置接口
