@@ -14,7 +14,9 @@
     "type": "git",
     "url": "git+https://github.com/cloudcome/iconfont-sync.git"
   },
-  "bin": "bin/index.cjs",
+  "bin": {
+    "iconfont-sync": "bin/index.cjs"
+  },
   "files": [
     "dist"
   ],
