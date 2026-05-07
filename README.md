@@ -4,7 +4,7 @@
 [![dependency-review](https://github.com/cloudcome/iconfont-sync/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/cloudcome/iconfont-sync/actions/workflows/dependency-review.yml)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/4fa1acaeb717469caddfe21a84c50bb2)](https://app.codacy.com/gh/cloudcome/iconfont-sync/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/4fa1acaeb717469caddfe21a84c50bb2)](https://app.codacy.com/gh/cloudcome/iconfont-sync/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
-[![npm version](https://badge.fury.io/js/@cloudcome%2Ficonfont-sync.svg)](https://npmjs.com/package/@cloudcome/iconfont-sync)
+[![npm version](https://badge.fury.io/js/iconfont-sync.svg)](https://npmjs.com/package/iconfont-sync)
 
 从 [iconfont.cn](https://www.iconfont.cn) 同步图标资源到本地项目，并自动生成 TypeScript 类型定义。
 
