@@ -63,11 +63,10 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
-          registry-url: 'https://registry.npmjs.org'
           package-manger-cache: false
 
       - name: Publish
-        run: npm publish --provenance --tag=latest
+        run: npm publish --provenance --tag=latest --registry='https://registry.npmjs.org'
 
       # - name: Publish
       #   uses: FrontEndDev-org/publish-node-package-action@v5
