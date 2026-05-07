@@ -3,16 +3,20 @@ name: release
 on:
   workflow_dispatch:
     inputs:
-      first-version:
-        description: "是否发布首个版本"
+      version-type:
+        description: 请选择版本号更新类型。
+         自动递增：根据提交信息自动递增版本号；
+         首个版本：发布首个版本，版本号固定为 package.json 中的 version 字段；
+         跳过版本：跳过版本号更新。
         required: true
         type: choice
         options:
-          - "NOT"
-          - "YES"
+          - 自动递增
+          - 首个版本
+          - 跳过版本
 
 jobs:
-  release:
+  version-bump:
     if: github.ref_name == 'v1.x'
     runs-on: ubuntu-latest
     permissions:
@@ -40,7 +44,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Version bump
-        run: node scripts/ci-version-bump.cjs --first-version=${{github.event.inputs.first-version}}
+        run: node scripts/ci-version-bump.cjs --version-type=${{github.event.inputs.version-type}}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
