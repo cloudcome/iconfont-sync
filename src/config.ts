@@ -23,7 +23,7 @@ export type Options = {
    */
   dest?: string;
   /**
-   * 生成的 TypeScript 类型文件名，默认 "iconfont.ts"
+   * 生成的 TypeScript 类型文件名，默认 "types.ts"
    */
   typesFileName?: string;
   /**

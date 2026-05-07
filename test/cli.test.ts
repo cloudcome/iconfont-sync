@@ -95,7 +95,7 @@ describe('命令行模块', () => {
           cookie: 'test-cookie',
           projectId: '123',
           dest: TEST_DIR,
-          typesFileName: 'iconfont.ts',
+          typesFileName: 'types.ts',
           typesExportName: 'IconName',
         }),
         'utf-8',

@@ -40,7 +40,7 @@ npx iconfont-sync
   "cookie": "",
   "projectId": "",
   "dest": "./src/assets/iconfont",
-  "typesFileName": "iconfont.ts",
+  "typesFileName": "types.ts",
   "typesExportName": "IconName"
 }
 ```
@@ -50,7 +50,7 @@ npx iconfont-sync
 | `cookie` | `string` | 否 | `""` | iconfont 登录后的 Cookie，留空则运行时交互输入 |
 | `projectId` | `string` | 否 | `""` | iconfont 项目 ID，留空则运行时交互输入 |
 | `dest` | `string` | 否 | `"./src/assets/iconfont"` | 图标资源输出目录 |
-| `typesFileName` | `string` | 否 | `"iconfont.ts"` | 生成的类型文件名 |
+| `typesFileName` | `string` | 否 | `"types.ts"` | 生成的类型文件名 |
 | `typesExportName` | `string` | 否 | `"IconName"` | 生成的类型导出名称 |
 
 ### 获取 Cookie
@@ -78,7 +78,7 @@ src/assets/iconfont/
 ├── iconfont.ttf
 ├── iconfont.woff
 ├── iconfont.woff2
-└── iconfont.ts        # 自动生成的类型文件
+└── types.ts        # 自动生成的类型文件
 ```
 
 生成的类型文件内容：

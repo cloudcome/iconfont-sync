@@ -67,11 +67,11 @@ describe('类型生成', () => {
       projectId: '123',
       src: './iconfont',
       dest: TEST_DIR,
-      typesFileName: 'iconfont.ts',
+      typesFileName: 'types.ts',
       typesExportName: 'IconName',
     });
 
-    const typesPath = resolve(TEST_DIR, 'iconfont.ts');
+    const typesPath = resolve(TEST_DIR, 'types.ts');
     expect(existsSync(typesPath)).toBe(true);
 
     const content = readFileSync(typesPath, 'utf-8');
@@ -140,11 +140,11 @@ describe('类型生成', () => {
       projectId: '789',
       src: './iconfont',
       dest: TEST_DIR,
-      typesFileName: 'iconfont.ts',
+      typesFileName: 'types.ts',
       typesExportName: 'IconName',
     });
 
-    const content = readFileSync(resolve(TEST_DIR, 'iconfont.ts'), 'utf-8');
+    const content = readFileSync(resolve(TEST_DIR, 'types.ts'), 'utf-8');
     expect(content).toBe(
       '/**\n * 此文件由 iconfont-sync@pkg-version-for-test 自动生成，请勿手动修改\n */\nexport type IconName = never;\n',
     );
@@ -162,7 +162,7 @@ describe('类型生成', () => {
         projectId: '999',
         src: './iconfont',
         dest: TEST_DIR,
-        typesFileName: 'iconfont.ts',
+        typesFileName: 'types.ts',
         typesExportName: 'IconName',
       }),
     ).rejects.toThrow('iconfont.json not found');
