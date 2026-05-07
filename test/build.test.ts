@@ -7,6 +7,7 @@ import {
 } from 'node:fs';
 import { resolve } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { version } from '../package.json';
 import { buildTypes } from '../src/build';
 
 const TEST_DIR = resolve(import.meta.dirname, '__fixtures_build__');
@@ -76,7 +77,7 @@ describe('类型生成', () => {
 
     const content = readFileSync(typesPath, 'utf-8');
     expect(content).toBe(
-      '/**\n * 此文件由 iconfont-sync@pkg-version-for-test 自动生成，请勿手动修改\n */\nexport type IconName = "home" | "user" | "settings";\n',
+      `/**\n * 此文件由 iconfont-sync@${version} 自动生成，请勿手动修改\n */\nexport type IconName = "home" | "user" | "settings";\n`,
     );
   });
 
@@ -115,7 +116,7 @@ describe('类型生成', () => {
 
     const content = readFileSync(resolve(TEST_DIR, 'icons.ts'), 'utf-8');
     expect(content).toBe(
-      '/**\n * 此文件由 iconfont-sync@pkg-version-for-test 自动生成，请勿手动修改\n */\nexport type MyIcons = "only";\n',
+      `/**\n * 此文件由 iconfont-sync@${version} 自动生成，请勿手动修改\n */\nexport type MyIcons = "only";\n`,
     );
   });
 
@@ -146,7 +147,7 @@ describe('类型生成', () => {
 
     const content = readFileSync(resolve(TEST_DIR, 'types.ts'), 'utf-8');
     expect(content).toBe(
-      '/**\n * 此文件由 iconfont-sync@pkg-version-for-test 自动生成，请勿手动修改\n */\nexport type IconName = never;\n',
+      `/**\n * 此文件由 iconfont-sync@${version} 自动生成，请勿手动修改\n */\nexport type IconName = never;\n`,
     );
   });
 
