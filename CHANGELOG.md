@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.3](https://github.com/cloudcome/iconfont-sync/compare/v1.1.2...v1.1.3) (2026-05-07)
+
+### Bug Fixes
+
+* 修正版本号输出不正确的问题 ([1c94204](https://github.com/cloudcome/iconfont-sync/commit/1c942043a6ac560326eddda1a2089c052f6ee7d0))
+
+## [1.1.3](https://github.com/cloudcome/iconfont-sync/compare/v1.1.2...v1.1.3) (2026-05-07)
+
+### Bug Fixes
+
+* 修正版本号输出不正确的问题 ([1c94204](https://github.com/cloudcome/iconfont-sync/commit/1c942043a6ac560326eddda1a2089c052f6ee7d0))
+
 ## [1.1.2](https://github.com/cloudcome/iconfont-sync/compare/v1.1.1...v1.1.2) (2026-05-07)
 
 ### Bug Fixes
