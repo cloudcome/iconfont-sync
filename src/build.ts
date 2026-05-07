@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { OptionsStrict } from './config';
@@ -39,11 +40,18 @@ export async function buildTypes(options: OptionsStrict) {
   const { dest, typesFileName, typesExportName } = options;
 
   const jsonPath = resolve(dest, 'iconfont.json');
+
+  if (!existsSync(jsonPath)) {
+    throw new Error('iconfont.json not found');
+  }
+
   const jsonContent = await readFile(jsonPath, 'utf-8');
   const iconfontData: IconfontJSON = JSON.parse(jsonContent);
 
   const iconNames = iconfontData.glyphs.map((g) => g.font_class);
-  const typeContent = `export type ${typesExportName} = ${iconNames.map((n) => `"${n}"`).join(' | ')};\n`;
+  const unionType =
+    iconNames.length > 0 ? iconNames.map((n) => `"${n}"`).join(' | ') : 'never';
+  const typeContent = `export type ${typesExportName} = ${unionType};\n`;
 
   const typesPath = resolve(dest, typesFileName);
   await writeFile(typesPath, typeContent, 'utf-8');
