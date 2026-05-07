@@ -4,7 +4,7 @@ const pkg = require('../package.json');
 /**
  * 允许的版本号更新类型
  */
-const allowChoices = ['自动递增', '首个版本', '跳过版本'];
+const allowChoices = ['自动版本', '固定版本', '跳过版本'];
 
 /**
  * 主函数
@@ -20,7 +20,7 @@ function main() {
     return;
   }
 
-  const bump = versionType === '首个版本' ? `${pkg.version}` : '';
+  const bump = versionType === '固定版本' ? `${pkg.version}` : '';
 
   // https://github.com/lerna/lerna/tree/main/libs/commands/version
   run(`npx lerna version ${bump} --yes`);

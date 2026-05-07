@@ -5,22 +5,23 @@ on:
     inputs:
       version-type:
         description: 请选择版本号更新类型。
-         自动递增：根据提交信息自动递增版本号；
-         首个版本：发布首个版本，版本号固定为 package.json 中的 version 字段；
+         自动版本：根据提交信息自动递增版本号；
+         固定版本：版本号固定为 package.json 中的 version 字段；
          跳过版本：跳过版本号更新。
         required: true
         type: choice
         options:
-          - 自动递增
-          - 首个版本
+          - 自动版本
+          - 固定版本
           - 跳过版本
 
 jobs:
-  version-bump:
+  release:
     if: github.ref_name == 'v1.x'
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -48,27 +49,5 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  publish-npm:
-    needs: version-bump
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-
-      - name: Setup node
-        uses: actions/setup-node@v6
-        with:
-          node-version-file: .nvmrc
-          package-manger-cache: false
-
       - name: Publish
-        run: npm publish --provenance --tag=latest --registry='https://registry.npmjs.org'
-
-      # - name: Publish
-      #   uses: FrontEndDev-org/publish-node-package-action@v5
-      #   with:
-      #     token: ${{ secrets.NPM_TOKEN }}
+        uses: FrontEndDev-org/publish-node-package-action@v5
