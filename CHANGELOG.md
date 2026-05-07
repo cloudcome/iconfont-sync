@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/cloudcome/iconfont-sync/compare/v1.1.1...v1.1.2) (2026-05-07)
+
+### Bug Fixes
+
+* 更新生成的 TypeScript 类型文件名为 "types.ts" ([7071377](https://github.com/cloudcome/iconfont-sync/commit/70713778702561e48437189250fb202dec1d873e))
+
+## [1.1.2](https://github.com/cloudcome/iconfont-sync/compare/v1.1.1...v1.1.2) (2026-05-07)
+
+### Bug Fixes
+
+* 更新生成的 TypeScript 类型文件名为 "types.ts" ([7071377](https://github.com/cloudcome/iconfont-sync/commit/70713778702561e48437189250fb202dec1d873e))
+
 ## [1.1.1](https://github.com/cloudcome/iconfont-sync/compare/v1.1.0...v1.1.1) (2026-05-07)
 
 **Note:** Version bump only for package iconfont-sync
