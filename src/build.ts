@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { OptionsStrict } from './config';
 
@@ -35,20 +35,16 @@ interface IconfontJSON {
  *
  * @param options - 必填配置项，需包含 dest、typesFileName、typesExportName
  */
-export function buildTypes(options: OptionsStrict) {
+export async function buildTypes(options: OptionsStrict) {
   const { dest, typesFileName, typesExportName } = options;
 
   const jsonPath = resolve(dest, 'iconfont.json');
-  const jsonContent = readFileSync(jsonPath, 'utf-8');
+  const jsonContent = await readFile(jsonPath, 'utf-8');
   const iconfontData: IconfontJSON = JSON.parse(jsonContent);
 
   const iconNames = iconfontData.glyphs.map((g) => g.font_class);
-
-  const name =
-    iconfontData.name.charAt(0).toUpperCase() + iconfontData.name.slice(1);
-
   const typeContent = `export type ${typesExportName} = ${iconNames.map((n) => `"${n}"`).join(' | ')};\n`;
 
   const typesPath = resolve(dest, typesFileName);
-  writeFileSync(typesPath, typeContent, 'utf-8');
+  await writeFile(typesPath, typeContent, 'utf-8');
 }
