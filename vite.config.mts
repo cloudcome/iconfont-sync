@@ -6,18 +6,12 @@ import dts from "vite-plugin-dts";
 import { externalizeDeps } from "vite-plugin-externalize-deps";
 import { defineConfig } from "vitest/config";
 
-import pkg from "./package.json";
-
 export default defineConfig((env) => {
   const isTest = env.mode === "test";
 
   return {
     resolve: {
       tsconfigPaths: true,
-    },
-    define: {
-      PKG_VERSION: JSON.stringify(isTest ? "pkg-version-for-test" : pkg.version),
-      IS_TEST: JSON.stringify(isTest),
     },
     build: {
       target: "ES2024",
