@@ -51,7 +51,7 @@ export const defaultOptions: Options = {
   cookie: '',
   projectId: '',
   dest: './src/assets/iconfont',
-  typesFileName: 'iconfont.ts',
+  typesFileName: 'types.ts',
   typesExportName: 'IconName',
 };
 
