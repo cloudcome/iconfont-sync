@@ -1,0 +1,15 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/refs/heads/main/schemas/config.json",
+  "release-type": "node",
+  "plugins": ["node-workspace"],
+  "group-pull-request-title-pattern": "chore(${branch}): release",
+  "bootstrap-sha": "886349ff79c1c516c6424de20b40be6130e25955",
+  "packages": {
+    "packages/utils-browser": {},
+    "packages/utils-core": {},
+    "packages/utils-node": {},
+    "packages/utils-react": {},
+    "packages/utils-uni": {},
+    "packages/utils-vue": {}
+  }
+}

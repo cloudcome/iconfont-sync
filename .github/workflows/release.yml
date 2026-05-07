@@ -1,0 +1,50 @@
+name: release
+
+on:
+  workflow_dispatch:
+    inputs:
+      first-version:
+        description: "是否发布首个版本"
+        required: true
+        type: choice
+        options:
+          - "NOT"
+          - "YES"
+
+jobs:
+  release:
+    if: github.ref_name == 'v1.x'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/setup-node
+
+      - name: Build
+        run: npm run build
+
+      - name: Code lint
+        run: npm run lint
+
+      - name: Unit test
+        run: npm run test
+
+      - name: Git config
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Version bump
+        run: node scripts/ci-version-bump.cjs --first-version=${{github.event.inputs.first-version}}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish
+        uses: FrontEndDev-org/publish-node-package-action@v5
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
