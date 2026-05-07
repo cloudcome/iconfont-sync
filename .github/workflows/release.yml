@@ -37,5 +37,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Rebuild
+        run: npm run build #将新版本号注入到构建中
+
       - name: Publish
         uses: FrontEndDev-org/publish-node-package-action@v5
