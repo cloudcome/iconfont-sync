@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { objectDefaults } from '@cloudcome/utils-core/object';
 
 /**
  * iconfont-sync 配置选项
@@ -64,7 +65,7 @@ export const defaultOptions: Options = {
  * @returns 合并后的完整配置对象
  * @throws 当配置文件不存在时抛出错误
  */
-export function loadConfig(configPath?: string): Options {
+export function loadConfig(configPath?: string): OptionsStrict {
   const filePath = configPath || resolve(process.cwd(), CONFIG_FILE_NAME);
 
   if (!existsSync(filePath)) {
@@ -74,7 +75,7 @@ export function loadConfig(configPath?: string): Options {
   const content = readFileSync(filePath, 'utf-8');
   const config = JSON.parse(content) as Partial<Options>;
 
-  return { ...defaultOptions, ...config };
+  return objectDefaults(config, defaultOptions) as OptionsStrict;
 }
 
 /**
