@@ -24,4 +24,4 @@ jobs:
         if: github.actor != 'dependabot[bot]'
         with:
           api-token: ${{ secrets.CODACY_API_TOKEN }}
-          coverage-reports: lcov.info
+          coverage-reports: coverage/lcov.info
