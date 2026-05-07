@@ -63,7 +63,7 @@ export default defineConfig((env) => {
         nodeBuiltins: true,
       }),
       dts({
-        include: "src",
+        entryRoot: "src",
       }),
     ],
   };
