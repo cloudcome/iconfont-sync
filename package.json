@@ -34,7 +34,7 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "prepare": "node .husky/prepare.mjs",
+    "prepare": "lefthook install",
     "lint": "biome check && tsc --noEmit",
     "lint:fix": "biome check --fix --unsafe && tsc --noEmit",
     "build": "cross-env NODE_ENV=production vite build",
@@ -51,7 +51,7 @@
     "@types/node": "24",
     "@vitest/coverage-v8": "^4.1.5",
     "cross-env": "^10.1.0",
-    "husky": "^9.1.7",
+    "lefthook": "^2.1.6",
     "lint-staged": "^17.0.2",
     "taze": "^19.11.0",
     "typescript": "^6.0.3",

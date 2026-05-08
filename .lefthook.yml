@@ -1,0 +1,33 @@
+pre-commit:
+  piped: true
+  commands:
+    node-env:
+      priority: 1
+      run: |
+        echo "node version = $(node -v)"
+        echo "npm version = $(npm -v)"
+    lint-staged:
+      priority: 2
+      # https://github.com/lint-staged/lint-staged?tab=readme-ov-file#command-line-flags
+      run: npx lint-staged --allow-empty
+      # https://lefthook.dev/configuration/stage_fixed/
+      stage_fixed: true
+
+commit-msg:
+  commands:
+    commitlint:
+      # https://commitlint.js.org/guides/local-setup.html
+      run: npx --no-stdio -- commitlint --edit $1
+
+pre-push:
+  piped: true
+  commands:
+    build:
+      priority: 1
+      run: npm run build
+    lint:
+      priority: 2
+      run: npm run lint
+    test:
+      priority: 3
+      run: npm run test
