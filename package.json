@@ -47,7 +47,7 @@
     "@commitlint/config-conventional": "^20.5.3",
     "@lerna-lite/cli": "^5.2.1",
     "@lerna-lite/version": "^5.2.1",
-    "@types/node": "24",
+    "@types/node": "25",
     "@vitest/coverage-v8": "^4.1.5",
     "cross-env": "^10.1.0",
     "lefthook": "^2.1.6",
