@@ -4,36 +4,34 @@
   "vcs": {
     "enabled": true,
     "clientKind": "git",
-    "useIgnoreFile"  : true
+    "useIgnoreFile": true
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": [
-      "{src,test,scripts}/**/*"
-    ],
+    "includes": ["{src,test,scripts}/**/*"]
   },
   "assist": {
-    "enabled": true,
+    "enabled": true
   },
   // 继承 .editorconfig
   "formatter": {
     "enabled": true,
-    "useEditorconfig": true,
+    "useEditorconfig": true
   },
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
-    },
+      "recommended": true
+    }
   },
   "javascript": {
     "formatter": {
-      "quoteStyle": "single",
-    },
+      "quoteStyle": "single"
+    }
   },
   "json": {
     "formatter": {
-      "enabled": true,
-    },
-  },
+      "enabled": true
+    }
+  }
 }
