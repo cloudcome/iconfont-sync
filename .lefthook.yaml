@@ -1,8 +1,8 @@
 pre-commit:
   commands:
     lint-staged:
-      # https://github.com/lint-staged/lint-staged?tab=readme-ov-file#command-line-flags
-      run: npx lint-staged --allow-empty
+      glob: "*"
+      run: biome check --fix --unsafe --no-errors-on-unmatched --files-ignore-unknown=true
       # https://lefthook.dev/configuration/stage_fixed/
       stage_fixed: true
 
