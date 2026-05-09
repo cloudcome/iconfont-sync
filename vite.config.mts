@@ -2,50 +2,48 @@
  * @file vite.config.mts
  * @ref https://vitejs.dev/
  */
-import dts from "vite-plugin-dts";
-import { externalizeDeps } from "vite-plugin-externalize-deps";
-import { defineConfig } from "vitest/config";
+import dts from 'vite-plugin-dts';
+import { externalizeDeps } from 'vite-plugin-externalize-deps';
+import { defineConfig } from 'vitest/config';
 
-export default defineConfig((env) => {
-  const isTest = env.mode === "test";
-
+export default defineConfig((_env) => {
   return {
     resolve: {
       tsconfigPaths: true,
     },
     build: {
-      target: "ES2024",
+      target: 'ES2024',
       minify: false,
       sourcemap: true,
       copyPublicDir: false,
       reportCompressedSize: false,
       lib: {
         entry: {
-          index: "src/index.ts",
+          index: 'src/index.ts',
         },
       },
       rolldownOptions: {
         output: [
           {
-            format: "esm",
-            entryFileNames: "[name].mjs",
-            chunkFileNames: "[name].mjs",
+            format: 'esm',
+            entryFileNames: '[name].mjs',
+            chunkFileNames: '[name].mjs',
           },
           {
-            format: "cjs",
-            entryFileNames: "[name].cjs",
-            chunkFileNames: "[name].cjs",
+            format: 'cjs',
+            entryFileNames: '[name].cjs',
+            chunkFileNames: '[name].cjs',
           },
         ],
       },
     },
     test: {
       globals: true,
-      environment: "node",
+      environment: 'node',
       coverage: {
         all: true,
-        include: ["src/**/*.ts"],
-        reporter: ["lcov", "text"],
+        include: ['src/**/*.ts'],
+        reporter: ['lcov', 'text'],
       },
     },
     plugins: [
@@ -57,7 +55,7 @@ export default defineConfig((env) => {
         nodeBuiltins: true,
       }),
       dts({
-        entryRoot: "src",
+        entryRoot: 'src',
       }),
     ],
   };
