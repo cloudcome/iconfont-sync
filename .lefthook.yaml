@@ -2,7 +2,7 @@ pre-commit:
   commands:
     lint-staged:
       glob: "*"
-      run: biome check --fix --unsafe --no-errors-on-unmatched --files-ignore-unknown=true
+      run: npx biome check --fix --unsafe --no-errors-on-unmatched --files-ignore-unknown=true
       # https://lefthook.dev/configuration/stage_fixed/
       stage_fixed: true
 
