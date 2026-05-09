@@ -1,8 +1,10 @@
+# @ref https://evilmartians.github.io/lefthook/
+
 pre-commit:
   commands:
     lint-staged:
       glob: "*"
-      run: npx biome check --fix --unsafe --no-errors-on-unmatched --files-ignore-unknown=true
+      run: npx @biomejs/biome check --fix --unsafe --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
       # https://lefthook.dev/configuration/stage_fixed/
       stage_fixed: true
 
