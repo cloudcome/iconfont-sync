@@ -27,9 +27,6 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^20.5.3
         version: 20.5.3
-      '@commitlint/types':
-        specifier: ^20.5.0
-        version: 20.5.0
       '@lerna-lite/cli':
         specifier: ^5.2.1
         version: 5.2.1(@lerna-lite/version@5.2.1(@types/node@24.12.3)(conventional-commits-filter@5.0.0))(@types/node@24.12.3)
