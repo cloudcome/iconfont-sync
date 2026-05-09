@@ -1,5 +1,5 @@
-import { defineConfig } from "taze";
+import { defineConfig } from 'taze';
 
 export default defineConfig({
-  exclude: ["pnpm", "@types/node"],
+  exclude: ['pnpm', '@types/node'],
 });
