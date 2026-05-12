@@ -18,7 +18,8 @@
     "iconfont-sync": "bin/index.cjs"
   },
   "files": [
-    "dist"
+    "dist",
+    "schema.json"
   ],
   "type": "module",
   "sideEffects": false,
