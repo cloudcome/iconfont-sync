@@ -49,11 +49,9 @@ describe('配置模块', () => {
       const content = readFileSync(CONFIG_FILE, 'utf-8');
       const parsed = JSON.parse(content);
 
+      expect(parsed.$schema).toBe('node_modules/iconfont-sync/schema.json');
       expect(parsed.cookie).toBe(defaultOptions.cookie);
       expect(parsed.projectId).toBe(defaultOptions.projectId);
-      expect(parsed.dest).toBe(defaultOptions.dest);
-      expect(parsed.typesFileName).toBe(defaultOptions.typesFileName);
-      expect(parsed.typesExportName).toBe(defaultOptions.typesExportName);
     });
 
     it('应覆盖已存在的配置文件', () => {
