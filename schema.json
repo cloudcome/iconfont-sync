@@ -5,6 +5,9 @@
   "description": "JSON schema for the .iconfont-sync.json configuration file.",
   "type": "object",
   "properties": {
+    "$schema": {
+      "type": "string"
+    },
     "cookie": {
       "type": "string",
       "description": "iconfont 网站登录后的 Cookie，用于接口鉴权。"
