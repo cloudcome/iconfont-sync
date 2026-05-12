@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/cloudcome/iconfont-sync/compare/v1.1.3...v1.2.0) (2026-05-12)
+
+### Features
+
+* **schema:** 添加 JSON schema 文件以支持配置验证 ([90ee063](https://github.com/cloudcome/iconfont-sync/commit/90ee0636e85ff0d1ee59083ecda6ae42374af9b2))
+
+# [1.2.0](https://github.com/cloudcome/iconfont-sync/compare/v1.1.3...v1.2.0) (2026-05-12)
+
+### Features
+
+* **schema:** 添加 JSON schema 文件以支持配置验证 ([90ee063](https://github.com/cloudcome/iconfont-sync/commit/90ee0636e85ff0d1ee59083ecda6ae42374af9b2))
+
 ## [1.1.3](https://github.com/cloudcome/iconfont-sync/compare/v1.1.2...v1.1.3) (2026-05-07)
 
 ### Bug Fixes
