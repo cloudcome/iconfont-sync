@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/cloudcome/iconfont-sync/schema.json",
+  "title": "Iconfont Sync Configuration",
+  "description": "JSON schema for the .iconfont-sync.json configuration file.",
+  "type": "object",
+  "properties": {
+    "cookie": {
+      "type": "string",
+      "description": "iconfont 网站登录后的 Cookie，用于接口鉴权。"
+    },
+    "projectId": {
+      "type": "string",
+      "description": "iconfont 项目 ID。"
+    },
+    "src": {
+      "type": "string",
+      "description": "图标文件下载源目录，默认 ./iconfont。",
+      "default": "./iconfont"
+    },
+    "dest": {
+      "type": "string",
+      "description": "图标文件输出目标目录，默认 src/assets/iconfont。",
+      "default": "src/assets/iconfont"
+    },
+    "typesFileName": {
+      "type": "string",
+      "description": "生成的 TypeScript 类型文件名，默认 types.ts。",
+      "default": "types.ts"
+    },
+    "typesExportName": {
+      "type": "string",
+      "description": "生成的类型导出名称，默认 IconName。",
+      "default": "IconName"
+    }
+  },
+  "required": ["cookie", "projectId"],
+  "additionalProperties": false
+}

@@ -19,7 +19,7 @@ export type Options = {
    */
   src?: string;
   /**
-   * 图标文件输出目标目录，默认 "./dist-local/iconfont"
+   * 图标文件输出目标目录，默认 "src/assets/iconfont"
    */
   dest?: string;
   /**
@@ -50,7 +50,7 @@ const CONFIG_FILE_NAME = '.iconfont-sync.json';
 export const defaultOptions: Options = {
   cookie: '',
   projectId: '',
-  dest: './src/assets/iconfont',
+  dest: 'src/assets/iconfont',
   typesFileName: 'types.ts',
   typesExportName: 'IconName',
 };
@@ -89,7 +89,15 @@ export function generateConfig(dirname: string): void {
   const filePath = resolve(dirname, CONFIG_FILE_NAME);
   writeFileSync(
     filePath,
-    `${JSON.stringify(defaultOptions, null, 2)}\n`,
+    `${JSON.stringify(
+      {
+        $schema: 'node_modules/iconfont-sync/schema.json',
+        cookie: '',
+        projectId: '',
+      },
+      null,
+      2,
+    )}\n`,
     'utf-8',
   );
 }
