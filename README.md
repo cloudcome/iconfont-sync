@@ -37,11 +37,9 @@ npx iconfont-sync
 
 ```json
 {
+  "$schema": "node_modules/iconfont-sync/schema.json",
   "cookie": "",
   "projectId": "",
-  "dest": "./src/assets/iconfont",
-  "typesFileName": "types.ts",
-  "typesExportName": "IconName"
 }
 ```
 
@@ -49,7 +47,7 @@ npx iconfont-sync
 |------|------|------|--------|------|
 | `cookie` | `string` | 否 | `""` | iconfont 登录后的 Cookie，留空则运行时交互输入 |
 | `projectId` | `string` | 否 | `""` | iconfont 项目 ID，留空则运行时交互输入 |
-| `dest` | `string` | 否 | `"./src/assets/iconfont"` | 图标资源输出目录 |
+| `dest` | `string` | 否 | `"src/assets/iconfont"` | 图标资源输出目录 |
 | `typesFileName` | `string` | 否 | `"types.ts"` | 生成的类型文件名 |
 | `typesExportName` | `string` | 否 | `"IconName"` | 生成的类型导出名称 |
 
