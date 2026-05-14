@@ -28,8 +28,26 @@
     }
   },
   "javascript": {
+    "assist": {
+      "enabled": true
+    },
     "formatter": {
+      "enabled": true,
       "quoteStyle": "single"
+    },
+    "linter": {
+      "enabled": true
+    }
+  },
+  "json": {
+    "assist": {
+      "enabled": true
+    },
+    "formatter": {
+      "enabled": true
+    },
+    "linter": {
+      "enabled": true
     }
   }
 }
