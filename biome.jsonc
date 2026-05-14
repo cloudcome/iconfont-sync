@@ -16,25 +16,20 @@
   "assist": {
     "enabled": true
   },
-  // 继承 .editorconfig
   "formatter": {
-    "enabled": true,
     "useEditorconfig": true
   },
   "linter": {
-    "enabled": true,
     "rules": {
-      "recommended": true
+      "correctness": {
+        "noUnusedVariables": "off",
+        "noUnusedImports": "off"
+      }
     }
   },
   "javascript": {
     "formatter": {
       "quoteStyle": "single"
-    }
-  },
-  "json": {
-    "formatter": {
-      "enabled": true
     }
   }
 }
