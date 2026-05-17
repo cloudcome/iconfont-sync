@@ -33,9 +33,7 @@ interface DownloadOptions {
  * @param options 下载配置选项
  * @returns 下载后的文件路径
  */
-export async function downloadResource(
-  options: DownloadOptions,
-): Promise<string> {
+export async function downloadResource(options: DownloadOptions): Promise<string> {
   const { url, outputDir, filename, headers = {} } = options;
 
   // 确保输出目录存在
@@ -101,10 +99,7 @@ export async function downloadResource(
  * @param outputDir 输出目录
  * @returns 下载成功的文件路径列表
  */
-export async function batchDownload(
-  urls: string[],
-  outputDir: string,
-): Promise<string[]> {
+export async function batchDownload(urls: string[], outputDir: string): Promise<string[]> {
   const results: string[] = [];
 
   for (let i = 0; i < urls.length; i++) {

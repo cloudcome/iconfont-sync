@@ -1,16 +1,7 @@
 import { existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
-import {
-  cancel,
-  confirm,
-  intro,
-  isCancel,
-  log,
-  outro,
-  spinner,
-  text,
-} from '@clack/prompts';
+import { cancel, confirm, intro, isCancel, log, outro, spinner, text } from '@clack/prompts';
 import { uniqueString } from '@cloudcome/utils-core/unique';
 import { buildTypes } from './build';
 import { generateConfig, loadConfig } from './config';
@@ -18,8 +9,7 @@ import { VERSION } from './const';
 import { downloadResource } from './download';
 import { unzip } from './unzip';
 
-const ICONFONT_DOWNLOAD_URL =
-  'https://www.iconfont.cn/api/project/download.zip';
+const ICONFONT_DOWNLOAD_URL = 'https://www.iconfont.cn/api/project/download.zip';
 
 /**
  * 生成默认配置文件

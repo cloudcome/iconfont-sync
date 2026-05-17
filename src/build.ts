@@ -50,8 +50,7 @@ export async function buildTypes(options: OptionsStrict) {
   const iconfontData: IconfontJSON = JSON.parse(jsonContent);
 
   const iconNames = iconfontData.glyphs.map((g) => g.font_class);
-  const unionType =
-    iconNames.length > 0 ? iconNames.map((n) => `"${n}"`).join(' | ') : 'never';
+  const unionType = iconNames.length > 0 ? iconNames.map((n) => `"${n}"`).join(' | ') : 'never';
   const typeContent = [
     '/**',
     ` * 此文件由 iconfont-sync@${VERSION} 自动生成，请勿手动修改`,

@@ -2,20 +2,13 @@ import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 
-const {
-  mockExtract,
-  mockCp,
-  mockReaddir,
-  mockRm,
-  mockTmpdir,
-  mockUniqueString,
-} = vi.hoisted(() => ({
-  mockExtract: vi.fn(),
-  mockCp: vi.fn(),
-  mockReaddir: vi.fn(),
-  mockRm: vi.fn(),
-  mockTmpdir: vi.fn(() => '/tmp'),
-  mockUniqueString: vi.fn(() => 'abc123'),
+const { mockExtract, mockCp, mockReaddir, mockRm, mockTmpdir, mockUniqueString } = vi.hoisted(() => ({
+  mockExtract: vi.fn<() => Promise<void>>(),
+  mockCp: vi.fn<() => Promise<void>>(),
+  mockReaddir: vi.fn<() => Promise<unknown[]>>(),
+  mockRm: vi.fn<() => Promise<void>>(),
+  mockTmpdir: vi.fn<() => string>(() => '/tmp'),
+  mockUniqueString: vi.fn<() => string>(() => 'abc123'),
 }));
 
 vi.mock('extract-zip', () => ({
@@ -70,11 +63,7 @@ describe('解压模块', () => {
     expect(mockExtract).toHaveBeenCalledWith(zipPath, {
       dir: '/tmp/iconfont-sync-abc123',
     });
-    expect(mockCp).toHaveBeenCalledWith(
-      '/tmp/iconfont-sync-abc123',
-      resolve(outputDir),
-      { recursive: true },
-    );
+    expect(mockCp).toHaveBeenCalledWith('/tmp/iconfont-sync-abc123', resolve(outputDir), { recursive: true });
     expect(mockRm).toHaveBeenCalledWith('/tmp/iconfont-sync-abc123', {
       recursive: true,
       force: true,
@@ -83,9 +72,7 @@ describe('解压模块', () => {
   });
 
   it('输出目录不存在时应自动创建', async () => {
-    mockReaddir.mockResolvedValue([
-      { name: 'file.css', isDirectory: () => false },
-    ]);
+    mockReaddir.mockResolvedValue([{ name: 'file.css', isDirectory: () => false }]);
 
     const zipPath = resolve(TEST_DIR, 'test.zip');
     writeFileSync(zipPath, 'fake-zip-content');
@@ -98,9 +85,7 @@ describe('解压模块', () => {
   });
 
   it('应返回解析后的输出目录路径', async () => {
-    mockReaddir.mockResolvedValue([
-      { name: 'file.css', isDirectory: () => false },
-    ]);
+    mockReaddir.mockResolvedValue([{ name: 'file.css', isDirectory: () => false }]);
 
     const zipPath = resolve(TEST_DIR, 'test.zip');
     writeFileSync(zipPath, 'fake-zip-content');
@@ -113,9 +98,7 @@ describe('解压模块', () => {
   });
 
   it('解压结果只有一个文件夹时应扁平化', async () => {
-    mockReaddir.mockResolvedValue([
-      { name: 'font_123456', isDirectory: () => true },
-    ]);
+    mockReaddir.mockResolvedValue([{ name: 'font_123456', isDirectory: () => true }]);
 
     const zipPath = resolve(TEST_DIR, 'test.zip');
     writeFileSync(zipPath, 'fake-zip-content');
@@ -124,11 +107,9 @@ describe('解压模块', () => {
 
     await unzip({ zipPath, outputDir });
 
-    expect(mockCp).toHaveBeenCalledWith(
-      '/tmp/iconfont-sync-abc123/font_123456',
-      resolve(outputDir),
-      { recursive: true },
-    );
+    expect(mockCp).toHaveBeenCalledWith('/tmp/iconfont-sync-abc123/font_123456', resolve(outputDir), {
+      recursive: true,
+    });
   });
 
   it('解压失败时也应清理临时目录', async () => {
@@ -139,9 +120,7 @@ describe('解压模块', () => {
 
     const outputDir = resolve(TEST_DIR, 'output');
 
-    await expect(unzip({ zipPath, outputDir })).rejects.toThrow(
-      'extract failed',
-    );
+    await expect(unzip({ zipPath, outputDir })).rejects.toThrow('extract failed');
 
     expect(mockRm).toHaveBeenCalledWith('/tmp/iconfont-sync-abc123', {
       recursive: true,

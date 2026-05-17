@@ -1,10 +1,4 @@
-import {
-  existsSync,
-  mkdirSync,
-  readFileSync,
-  rmSync,
-  writeFileSync,
-} from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { defaultOptions, generateConfig, loadConfig } from '../src/config';
@@ -68,11 +62,7 @@ describe('配置模块', () => {
 
   describe('加载配置文件', () => {
     it('应加载配置并与默认值合并', () => {
-      writeFileSync(
-        CONFIG_FILE,
-        JSON.stringify({ cookie: 'test-cookie', projectId: '123' }),
-        'utf-8',
-      );
+      writeFileSync(CONFIG_FILE, JSON.stringify({ cookie: 'test-cookie', projectId: '123' }), 'utf-8');
 
       const config = loadConfig(CONFIG_FILE);
 

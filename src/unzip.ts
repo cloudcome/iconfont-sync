@@ -39,10 +39,7 @@ export async function unzip(options: UnzipOptions): Promise<string> {
     await extract(zipPath, { dir: tmpDir });
 
     const entries = await readdir(tmpDir, { withFileTypes: true });
-    const sourceDir =
-      entries.length === 1 && entries[0].isDirectory()
-        ? join(tmpDir, entries[0].name)
-        : tmpDir;
+    const sourceDir = entries.length === 1 && entries[0].isDirectory() ? join(tmpDir, entries[0].name) : tmpDir;
 
     if (!existsSync(outputDir)) {
       mkdirSync(outputDir, { recursive: true });

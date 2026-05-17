@@ -1,43 +1,28 @@
 import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import {
-  afterAll,
-  afterEach,
-  beforeAll,
-  describe,
-  expect,
-  it,
-  vi,
-} from 'vitest';
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 
-const {
-  mockConfirm,
-  mockIntro,
-  mockOutro,
-  mockCancel,
-  mockLog,
-  mockSpinner,
-  mockText,
-  mockIsCancel,
-} = vi.hoisted(() => ({
-  mockConfirm: vi.fn(),
-  mockIntro: vi.fn(),
-  mockOutro: vi.fn(),
-  mockCancel: vi.fn(),
-  mockLog: {
-    warn: vi.fn(),
-    success: vi.fn(),
-    step: vi.fn(),
-    error: vi.fn(),
-    info: vi.fn(),
-  },
-  mockSpinner: vi.fn(() => ({
-    start: vi.fn(),
-    stop: vi.fn(),
-  })),
-  mockText: vi.fn(),
-  mockIsCancel: vi.fn(() => false),
-}));
+const { mockConfirm, mockIntro, mockOutro, mockCancel, mockLog, mockSpinner, mockText, mockIsCancel } = vi.hoisted(
+  () => ({
+    mockConfirm: vi.fn<() => Promise<unknown>>(),
+    mockIntro: vi.fn<() => void>(),
+    mockOutro: vi.fn<() => void>(),
+    mockCancel: vi.fn<(msg: string) => void>(),
+    mockLog: {
+      warn: vi.fn<(msg: string) => void>(),
+      success: vi.fn<(msg: string) => void>(),
+      step: vi.fn<(msg: string) => void>(),
+      error: vi.fn<(msg: string) => void>(),
+      info: vi.fn<(msg: string) => void>(),
+    },
+    mockSpinner: vi.fn<() => { start: () => void; stop: () => void }>(() => ({
+      start: vi.fn<() => void>(),
+      stop: vi.fn<() => void>(),
+    })),
+    mockText: vi.fn<() => Promise<unknown>>(),
+    mockIsCancel: vi.fn<(value: unknown) => boolean>(() => false),
+  }),
+);
 
 vi.mock('@clack/prompts', () => ({
   intro: mockIntro,
@@ -51,15 +36,15 @@ vi.mock('@clack/prompts', () => ({
 }));
 
 vi.mock('../src/download', () => ({
-  downloadResource: vi.fn().mockResolvedValue('/fake/path/download.zip'),
+  downloadResource: vi.fn<() => Promise<string>>().mockResolvedValue('/fake/path/download.zip'),
 }));
 
 vi.mock('../src/unzip', () => ({
-  unzip: vi.fn().mockResolvedValue('/fake/path/output'),
+  unzip: vi.fn<() => Promise<string>>().mockResolvedValue('/fake/path/output'),
 }));
 
 vi.mock('../src/build', () => ({
-  buildTypes: vi.fn().mockResolvedValue(undefined),
+  buildTypes: vi.fn<() => Promise<void>>().mockResolvedValue(undefined),
 }));
 
 import { runCommand } from '../src/cli';

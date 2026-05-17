@@ -3,12 +3,18 @@ import { resolve } from 'node:path';
 import { PassThrough } from 'node:stream';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 
+interface MockRequestType {
+  on: ReturnType<typeof vi.fn>;
+  setTimeout: ReturnType<typeof vi.fn>;
+  destroy: ReturnType<typeof vi.fn>;
+}
+
 const { mockGet, mockRequest } = vi.hoisted(() => ({
-  mockGet: vi.fn(),
+  mockGet: vi.fn<(url: string, options: unknown, callback: (res: unknown) => void) => MockRequestType>(),
   mockRequest: {
-    on: vi.fn().mockReturnThis(),
-    setTimeout: vi.fn().mockReturnThis(),
-    destroy: vi.fn(),
+    on: vi.fn<(event: string, cb: () => void) => MockRequestType>().mockReturnThis(),
+    setTimeout: vi.fn<(timeout: number, cb: () => void) => MockRequestType>().mockReturnThis(),
+    destroy: vi.fn<() => void>(),
   },
 }));
 
@@ -28,10 +34,7 @@ import { batchDownload, downloadResource } from '../src/download';
 
 const TEST_DIR = resolve(import.meta.dirname, '__fixtures_download__');
 
-function createMockResponse(
-  statusCode: number,
-  headers?: Record<string, string>,
-) {
+function createMockResponse(statusCode: number, headers?: Record<string, string>) {
   const stream = new PassThrough();
   return {
     statusCode,
@@ -62,16 +65,10 @@ describe('下载模块', () => {
     it('应成功下载文件', async () => {
       const mockResponse = createMockResponse(200);
 
-      mockGet.mockImplementation(
-        (
-          _url: string,
-          _opts: unknown,
-          callback: (res: typeof mockResponse) => void,
-        ) => {
-          callback(mockResponse);
-          return mockRequest;
-        },
-      );
+      mockGet.mockImplementation((_url: string, _opts: unknown, callback: (res: typeof mockResponse) => void) => {
+        callback(mockResponse);
+        return mockRequest;
+      });
 
       const result = await downloadResource({
         url: 'https://example.com/file.zip',
@@ -92,17 +89,15 @@ describe('下载模块', () => {
       const finalResponse = createMockResponse(200);
 
       let callCount = 0;
-      mockGet.mockImplementation(
-        (_url: string, _opts: unknown, callback: (res: unknown) => void) => {
-          callCount++;
-          if (callCount === 1) {
-            callback(redirectResponse);
-          } else {
-            callback(finalResponse);
-          }
-          return mockRequest;
-        },
-      );
+      mockGet.mockImplementation((_url: string, _opts: unknown, callback: (res: unknown) => void) => {
+        callCount++;
+        if (callCount === 1) {
+          callback(redirectResponse);
+        } else {
+          callback(finalResponse);
+        }
+        return mockRequest;
+      });
 
       const result = await downloadResource({
         url: 'https://example.com/file.zip',
@@ -118,16 +113,10 @@ describe('下载模块', () => {
         statusCode: 404,
       };
 
-      mockGet.mockImplementation(
-        (
-          _url: string,
-          _opts: unknown,
-          callback: (res: typeof mockResponse) => void,
-        ) => {
-          callback(mockResponse);
-          return mockRequest;
-        },
-      );
+      mockGet.mockImplementation((_url: string, _opts: unknown, callback: (res: typeof mockResponse) => void) => {
+        callback(mockResponse);
+        return mockRequest;
+      });
 
       await expect(
         downloadResource({
@@ -140,15 +129,15 @@ describe('下载模块', () => {
 
     it('请求出错时应拒绝', async () => {
       mockGet.mockImplementation(() => {
-        const req = {
-          on: vi.fn((event: string, cb: (err: Error) => void) => {
+        const req: MockRequestType = {
+          on: vi.fn<(event: string, cb: (err: Error) => void) => MockRequestType>((event, cb) => {
             if (event === 'error') {
               setTimeout(() => cb(new Error('Network error')), 0);
             }
             return req;
           }),
-          setTimeout: vi.fn().mockReturnThis(),
-          destroy: vi.fn(),
+          setTimeout: vi.fn<(timeout: number, cb: () => void) => MockRequestType>().mockReturnThis(),
+          destroy: vi.fn<() => void>(),
         };
         return req;
       });
@@ -164,13 +153,13 @@ describe('下载模块', () => {
 
     it('下载超时应拒绝', async () => {
       mockGet.mockImplementation(() => {
-        const req = {
-          on: vi.fn().mockReturnThis(),
-          setTimeout: vi.fn((_timeout: number, cb: () => void) => {
+        const req: MockRequestType = {
+          on: vi.fn<(event: string, cb: () => void) => MockRequestType>().mockReturnThis(),
+          setTimeout: vi.fn<(timeout: number, cb: () => void) => MockRequestType>((_timeout, cb) => {
             setTimeout(() => cb(), 0);
             return req;
           }),
-          destroy: vi.fn(),
+          destroy: vi.fn<() => void>(),
         };
         return req;
       });
@@ -189,16 +178,10 @@ describe('下载模块', () => {
 
       const mockResponse = createMockResponse(200);
 
-      mockGet.mockImplementation(
-        (
-          _url: string,
-          _opts: unknown,
-          callback: (res: typeof mockResponse) => void,
-        ) => {
-          callback(mockResponse);
-          return mockRequest;
-        },
-      );
+      mockGet.mockImplementation((_url: string, _opts: unknown, callback: (res: typeof mockResponse) => void) => {
+        callback(mockResponse);
+        return mockRequest;
+      });
 
       await downloadResource({
         url: 'https://example.com/file.zip',
@@ -214,21 +197,12 @@ describe('下载模块', () => {
     it('应成功下载多个文件', async () => {
       const mockResponse = createMockResponse(200);
 
-      mockGet.mockImplementation(
-        (
-          _url: string,
-          _opts: unknown,
-          callback: (res: typeof mockResponse) => void,
-        ) => {
-          callback(mockResponse);
-          return mockRequest;
-        },
-      );
+      mockGet.mockImplementation((_url: string, _opts: unknown, callback: (res: typeof mockResponse) => void) => {
+        callback(mockResponse);
+        return mockRequest;
+      });
 
-      const results = await batchDownload(
-        ['https://example.com/a.zip', 'https://example.com/b.zip'],
-        TEST_DIR,
-      );
+      const results = await batchDownload(['https://example.com/a.zip', 'https://example.com/b.zip'], TEST_DIR);
 
       expect(results).toHaveLength(2);
     });

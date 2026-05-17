@@ -1,10 +1,4 @@
-import {
-  existsSync,
-  mkdirSync,
-  readFileSync,
-  rmSync,
-  writeFileSync,
-} from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { version } from '../package.json';
@@ -57,11 +51,7 @@ describe('类型生成', () => {
       ],
     };
 
-    writeFileSync(
-      resolve(TEST_DIR, 'iconfont.json'),
-      JSON.stringify(iconfontData),
-      'utf-8',
-    );
+    writeFileSync(resolve(TEST_DIR, 'iconfont.json'), JSON.stringify(iconfontData), 'utf-8');
 
     await buildTypes({
       cookie: 'test',
@@ -99,11 +89,7 @@ describe('类型生成', () => {
       ],
     };
 
-    writeFileSync(
-      resolve(TEST_DIR, 'iconfont.json'),
-      JSON.stringify(iconfontData),
-      'utf-8',
-    );
+    writeFileSync(resolve(TEST_DIR, 'iconfont.json'), JSON.stringify(iconfontData), 'utf-8');
 
     await buildTypes({
       cookie: 'test',
@@ -130,11 +116,7 @@ describe('类型生成', () => {
       glyphs: [],
     };
 
-    writeFileSync(
-      resolve(TEST_DIR, 'iconfont.json'),
-      JSON.stringify(iconfontData),
-      'utf-8',
-    );
+    writeFileSync(resolve(TEST_DIR, 'iconfont.json'), JSON.stringify(iconfontData), 'utf-8');
 
     await buildTypes({
       cookie: 'test',
