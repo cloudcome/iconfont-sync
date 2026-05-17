@@ -4,15 +4,15 @@
 
 ## 速查
 
-| 文件 | 职责 |
-|------|------|
-| `src/cli.ts` | CLI 入口，`runCommand()` 编排完整同步流程 |
-| `src/config.ts` | `.iconfont-sync.json` 配置加载/生成，`Options` / `OptionsStrict` |
-| `src/download.ts` | HTTP 下载，支持重定向、30s 超时 |
-| `src/unzip.ts` | ZIP 解压到临时目录 → 扁平化嵌套 → 复制到目标 → 清理 |
-| `src/build.ts` | 读取 `iconfont.json` 生成 `export type Xxx = "a" \| "b"` |
-| `src/const.ts` | `VERSION`（构建时从 package.json 注入） |
-| `src/index.ts` | 公共导出聚合 |
+| 文件              | 职责                                                             |
+| ----------------- | ---------------------------------------------------------------- |
+| `src/cli.ts`      | CLI 入口，`runCommand()` 编排完整同步流程                        |
+| `src/config.ts`   | `.iconfont-sync.json` 配置加载/生成，`Options` / `OptionsStrict` |
+| `src/download.ts` | HTTP 下载，支持重定向、30s 超时                                  |
+| `src/unzip.ts`    | ZIP 解压到临时目录 → 扁平化嵌套 → 复制到目标 → 清理              |
+| `src/build.ts`    | 读取 `iconfont.json` 生成 `export type Xxx = "a" \| "b"`         |
+| `src/const.ts`    | `VERSION`（构建时从 package.json 注入）                          |
+| `src/index.ts`    | 公共导出聚合                                                     |
 
 ## 技术栈
 

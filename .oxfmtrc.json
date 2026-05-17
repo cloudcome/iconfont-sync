@@ -1,0 +1,17 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "ignorePatterns": [
+    // node
+    "**/node_modules/**",
+    "package-*.json",
+    "pnpm-*.yaml",
+    "yarn.lock",
+
+    // 工程化
+    "**/dist/**",
+    "**/dist-*/**",
+    "**/coverage/**",
+    "CHANGELOG.md"
+  ],
+  "singleQuote": true
+}

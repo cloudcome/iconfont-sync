@@ -3,8 +3,8 @@
 pre-commit:
   commands:
     lint-staged:
-      glob: "*"
-      run: npx @biomejs/biome check --fix --unsafe --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
+      glob: '*'
+      run: npx oxfmt --write --no-error-on-unmatched-pattern {staged_files} && npx oxlint --fix --fix-suggestions --fix-dangerously --no-error-on-unmatched-pattern {staged_files}
       # https://lefthook.dev/configuration/stage_fixed/
       stage_fixed: true
 

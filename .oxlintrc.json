@@ -1,0 +1,25 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "ignorePatterns": [
+    // node
+    "**/node_modules/**",
+    "package-*.json",
+    "pnpm-*.yaml",
+    "yarn.lock",
+
+    // 工程化
+    "**/dist/**",
+    "**/dist-*/**",
+    "**/coverage/**",
+    "CHANGELOG.md"
+  ],
+  "plugins": ["typescript", "unicorn", "oxc", "vitest", "node"],
+  "categories": {
+    "correctness": "error"
+  },
+  "env": {
+    "builtin": true,
+    "node": true,
+    "vitest": true
+  }
+}

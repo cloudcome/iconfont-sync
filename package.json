@@ -36,14 +36,18 @@
   },
   "scripts": {
     "prepare": "lefthook install",
-    "lint": "biome check && tsc --noEmit",
-    "lint:fix": "biome check --fix --unsafe && tsc --noEmit",
+    "lint": "oxlint && oxfmt --check && tsc --noEmit",
+    "lint:fix": "oxlint --fix --fix-suggestions --fix-dangerously && oxfmt --write && tsc --noEmit",
     "build": "cross-env NODE_ENV=production vite build",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage"
   },
+  "dependencies": {
+    "@clack/prompts": "^1.3.0",
+    "@cloudcome/utils-core": "^1.20.0",
+    "extract-zip": "^2.0.1"
+  },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.15",
     "@commitlint/cli": "^20.5.3",
     "@commitlint/config-conventional": "^20.5.3",
     "@lerna-lite/cli": "^5.2.1",
@@ -52,6 +56,8 @@
     "@vitest/coverage-v8": "^4.1.6",
     "cross-env": "^10.1.0",
     "lefthook": "^2.1.6",
+    "oxfmt": "^0.20.0",
+    "oxlint": "^1.20.0",
     "taze": "^19.11.0",
     "typescript": "^6.0.3",
     "vite": "^8.0.12",
@@ -59,10 +65,5 @@
     "vite-plugin-externalize-deps": "^0.10.0",
     "vitest": "^4.1.6"
   },
-  "packageManager": "pnpm@11.0.9+sha512.34ce82e6780233cf9cad8685029a8f81d2e06196c5a9bad98879f7424940c6817c4e4524fb7d38b8553ceed48b9758b8ebaf1abd3600c232c4c8cf7366086f38",
-  "dependencies": {
-    "@clack/prompts": "^1.3.0",
-    "@cloudcome/utils-core": "^1.20.0",
-    "extract-zip": "^2.0.1"
-  }
+  "packageManager": "pnpm@11.0.9+sha512.34ce82e6780233cf9cad8685029a8f81d2e06196c5a9bad98879f7424940c6817c4e4524fb7d38b8553ceed48b9758b8ebaf1abd3600c232c4c8cf7366086f38"
 }

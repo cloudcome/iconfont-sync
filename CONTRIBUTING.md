@@ -4,10 +4,10 @@
 
 ## 环境要求
 
-| 工具 | 版本 |
-|------|------|
+| 工具    | 版本              |
+| ------- | ----------------- |
 | Node.js | 24（见 `.nvmrc`） |
-| pnpm | 11 |
+| pnpm    | 11                |
 
 推荐使用 [nvm](https://github.com/nvm-sh/nvm) 管理 Node.js 版本：
 
@@ -81,12 +81,12 @@ pnpm lint:fix         # 自动修复代码风格问题
 
 ### 命名约定
 
-| 类别 | 风格 | 示例 |
-|------|------|------|
-| 文件 | kebab-case | `iconfont-sync.ts` |
-| 函数/变量 | camelCase | `loadConfig` |
-| 类型/接口 | PascalCase | `OptionsStrict` |
-| 常量 | UPPER_SNAKE_CASE | `CONFIG_FILE_NAME` |
+| 类别      | 风格             | 示例               |
+| --------- | ---------------- | ------------------ |
+| 文件      | kebab-case       | `iconfont-sync.ts` |
+| 函数/变量 | camelCase        | `loadConfig`       |
+| 类型/接口 | PascalCase       | `OptionsStrict`    |
+| 常量      | UPPER_SNAKE_CASE | `CONFIG_FILE_NAME` |
 
 ### 注释
 
@@ -121,17 +121,17 @@ npx vitest run test/unzip.test.ts
 
 ### Type 类型
 
-| type | 说明 |
-|------|------|
-| `feat` | 新功能 |
-| `fix` | 修复 Bug |
-| `docs` | 文档更新 |
-| `style` | 代码格式（不影响功能） |
-| `refactor` | 重构 |
-| `perf` | 性能优化 |
-| `test` | 测试相关 |
-| `chore` | 构建/工具链相关 |
-| `ci` | CI 配置相关 |
+| type       | 说明                   |
+| ---------- | ---------------------- |
+| `feat`     | 新功能                 |
+| `fix`      | 修复 Bug               |
+| `docs`     | 文档更新               |
+| `style`    | 代码格式（不影响功能） |
+| `refactor` | 重构                   |
+| `perf`     | 性能优化               |
+| `test`     | 测试相关               |
+| `chore`    | 构建/工具链相关        |
+| `ci`       | CI 配置相关            |
 
 ### 示例
 
