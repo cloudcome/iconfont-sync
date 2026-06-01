@@ -29,21 +29,21 @@ describe('类型生成', () => {
       glyphs: [
         {
           icon_id: '1',
-          name: 'home',
+          name: '首页',
           font_class: 'home',
           unicode: 'e001',
           unicode_decimal: 57345,
         },
         {
           icon_id: '2',
-          name: 'user',
+          name: '用户',
           font_class: 'user',
           unicode: 'e002',
           unicode_decimal: 57346,
         },
         {
           icon_id: '3',
-          name: 'settings',
+          name: '设置',
           font_class: 'settings',
           unicode: 'e003',
           unicode_decimal: 57347,
@@ -67,7 +67,7 @@ describe('类型生成', () => {
 
     const content = readFileSync(typesPath, 'utf-8');
     expect(content).toBe(
-      `/**\n * 此文件由 iconfont-sync@${version} 自动生成，请勿手动修改\n */\nexport type IconName = "home" | "user" | "settings";\n`,
+      `/**\n * 此文件由 iconfont-sync@${version} 自动生成，请勿手动修改\n */\nexport const Icons = {\n  /** 首页 */\n  home: 'home',\n  /** 用户 */\n  user: 'user',\n  /** 设置 */\n  settings: 'settings',\n} as const;\n\nexport type IconName = (typeof Icons)[keyof typeof Icons];\n`,
     );
   });
 
@@ -81,7 +81,7 @@ describe('类型生成', () => {
       glyphs: [
         {
           icon_id: '1',
-          name: 'only',
+          name: '唯一图标',
           font_class: 'only',
           unicode: 'e001',
           unicode_decimal: 57345,
@@ -102,7 +102,7 @@ describe('类型生成', () => {
 
     const content = readFileSync(resolve(TEST_DIR, 'icons.ts'), 'utf-8');
     expect(content).toBe(
-      `/**\n * 此文件由 iconfont-sync@${version} 自动生成，请勿手动修改\n */\nexport type MyIcons = "only";\n`,
+      `/**\n * 此文件由 iconfont-sync@${version} 自动生成，请勿手动修改\n */\nexport const Icons = {\n  /** 唯一图标 */\n  only: 'only',\n} as const;\n\nexport type MyIcons = (typeof Icons)[keyof typeof Icons];\n`,
     );
   });
 
@@ -129,7 +129,7 @@ describe('类型生成', () => {
 
     const content = readFileSync(resolve(TEST_DIR, 'types.ts'), 'utf-8');
     expect(content).toBe(
-      `/**\n * 此文件由 iconfont-sync@${version} 自动生成，请勿手动修改\n */\nexport type IconName = never;\n`,
+      `/**\n * 此文件由 iconfont-sync@${version} 自动生成，请勿手动修改\n */\nexport const Icons = {} as const;\n\nexport type IconName = never;\n`,
     );
   });
 

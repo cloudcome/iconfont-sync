@@ -32,8 +32,8 @@ interface IconfontJSON {
 /**
  * 根据 iconfont.json 生成 TypeScript 类型文件
  *
- * 读取 dest 目录下的 iconfont.json，提取所有图标的 font_class，
- * 生成形如 `export type IconName = "icon1" | "icon2"` 的联合类型文件。
+ * 读取 dest 目录下的 iconfont.json，提取所有图标的 font_class 和 name，
+ * 生成 `as const` 对象（每个 key 带 JSDoc 图标名称）及派生联合类型。
  *
  * @param options - 必填配置项，需包含 dest、typesFileName、typesExportName
  */
@@ -49,13 +49,27 @@ export async function buildTypes(options: OptionsStrict) {
   const jsonContent = await readFile(jsonPath, 'utf-8');
   const iconfontData: IconfontJSON = JSON.parse(jsonContent);
 
-  const iconNames = iconfontData.glyphs.map((g) => g.font_class);
-  const unionType = iconNames.length > 0 ? iconNames.map((n) => `"${n}"`).join(' | ') : 'never';
+  const glyphs = iconfontData.glyphs;
+  let iconObjectContent: string;
+
+  if (glyphs.length > 0) {
+    const entries = glyphs.map((g) => `  /** ${g.name} */\n  ${g.font_class}: '${g.font_class}',`).join('\n');
+    iconObjectContent = [
+      'export const Icons = {',
+      entries,
+      '} as const;',
+      '',
+      `export type ${typesExportName} = (typeof Icons)[keyof typeof Icons];`,
+    ].join('\n');
+  } else {
+    iconObjectContent = ['export const Icons = {} as const;', '', `export type ${typesExportName} = never;`].join('\n');
+  }
+
   const typeContent = [
     '/**',
     ` * 此文件由 iconfont-sync@${VERSION} 自动生成，请勿手动修改`,
     ' */',
-    `export type ${typesExportName} = ${unionType};`,
+    iconObjectContent,
     '',
   ].join('\n');
 
