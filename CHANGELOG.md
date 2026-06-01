@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/cloudcome/iconfont-sync/compare/v1.2.2...v1.3.0) (2026-06-01)
+
+### Features
+
+* **build:** 生成带 JSDoc 的 `as const` 图标对象及派生类型 ([2ebc659](https://github.com/cloudcome/iconfont-sync/commit/2ebc659942dfe67f63be7a75f812d3331d39eee2))
+
+# [1.3.0](https://github.com/cloudcome/iconfont-sync/compare/v1.2.2...v1.3.0) (2026-06-01)
+
+### Features
+
+* **build:** 生成带 JSDoc 的 `as const` 图标对象及派生类型 ([2ebc659](https://github.com/cloudcome/iconfont-sync/commit/2ebc659942dfe67f63be7a75f812d3331d39eee2))
+
 ## [1.2.2](https://github.com/cloudcome/iconfont-sync/compare/v1.2.1...v1.2.2) (2026-05-13)
 
 ### Bug Fixes
